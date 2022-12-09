@@ -1,7 +1,15 @@
-
-# below code works but it's inefficent
 def dailyTemperatures(temperatures):
-    # [73,74,75,71,69,72,76,73]
+    result = [0] * len(temperatures)
+    stack = []
+
+    for i,t in enumerate(temperatures):
+        while stack and t > stack[-1][0]:
+            result[stack[-1][1]] = i - stack[-1][1]
+            stack.pop()
+        stack.append([t,i])
+    return result
+
+    # below code works but it's inefficent
     i, j = 0, 1
     answer = []
     while i < len(temperatures) and j < len(temperatures):
